@@ -40,7 +40,7 @@ pipeline{
                 stage("run DockerContainer") {
                     steps {
                         echo "======== running docker image as SpringJenkinsMockContainer ========"
-                        bat "docker-compose up"
+                        bat "docker-compose up -d"
                     }
                 }
             }
