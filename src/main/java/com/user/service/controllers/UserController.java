@@ -1,5 +1,6 @@
 package com.user.service.controllers;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -71,11 +72,12 @@ public class UserController<T> {
 					.body(new ApiResponse("File Cant not be empty !!", false, HttpStatus.BAD_REQUEST));
 		}
 
-		if(!file.isEmpty()) {
-			if (!file.getContentType().equals("image/jpg") && !file.getContentType().equals("image/jpeg")) {
-				return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.BAD_REQUEST)
-						.body(new ApiResponse("Only JPG or JPEG File Allowed !!", false, HttpStatus.BAD_REQUEST));
-			}
+		String fileContentType = file.getContentType();
+		
+		if ((!file.isEmpty())
+				&& (!fileContentType.equals("image/jpg") && !file.getContentType().equals("image/jpeg"))) {
+			return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ApiResponse("Only JPG or JPEG File Allowed !!", false, HttpStatus.BAD_REQUEST));
 		}
 
 		// upload file to folder and add file name to user
@@ -86,8 +88,9 @@ public class UserController<T> {
 	// getProfile pic
 	@GetMapping("/get-profile/{userId}")
 	public ResponseEntity<T> getProfile(@PathVariable String userId) {
-		
-		return (ResponseEntity<T>) ResponseEntity.ok(ServletUriComponentsBuilder.fromCurrentContextPath().path("/image").path("userRepo.getProfilePath()").toUriString());
+
+		return (ResponseEntity<T>) ResponseEntity.ok(ServletUriComponentsBuilder.fromCurrentContextPath().path("/image")
+				.path("userRepo.getProfilePath()").toUriString());
 
 	}
 }

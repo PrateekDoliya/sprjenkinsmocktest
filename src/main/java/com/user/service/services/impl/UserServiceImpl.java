@@ -32,6 +32,8 @@ public class UserServiceImpl<T> implements UserService<T> {
 
 	@Autowired
 	private FileUploadHelper fileUploadHelper;
+	
+	private static final  String USER_ID = "user_id";
 
 	@Override
 	public T createUser(User user) {
@@ -43,7 +45,7 @@ public class UserServiceImpl<T> implements UserService<T> {
 	@Override
 	public T updateUser(User user, String userId) {
 		User user2 = this.userRepository.findById(userId)
-				.orElseThrow(() -> new ResourceNotFoundException("User", "user_id", userId));
+				.orElseThrow(() -> new ResourceNotFoundException("User", UserServiceImpl.USER_ID, userId));
 		user2.setUserEmail(user.getUserEmail());
 		user2.setUserName(user.getUserName());
 		user2.setUserPassword(user.getUserPassword());
@@ -53,7 +55,7 @@ public class UserServiceImpl<T> implements UserService<T> {
 	@Override
 	public T deleteUser(String userId) {
 		User user = this.userRepository.findById(userId)
-				.orElseThrow(() -> new ResourceNotFoundException("User", "user_id", userId));
+				.orElseThrow(() -> new ResourceNotFoundException("User", UserServiceImpl.USER_ID, userId));
 		this.userRepository.delete(user);
 		return (T) new ApiResponse("User Deleted Successfully !!!", true, HttpStatus.OK);
 	}
@@ -67,14 +69,14 @@ public class UserServiceImpl<T> implements UserService<T> {
 	@Override
 	public T getUserById(String userId) {
 		User user = this.userRepository.findById(userId)
-				.orElseThrow(() -> new ResourceNotFoundException("User", "user_id", userId));
+				.orElseThrow(() -> new ResourceNotFoundException("User", UserServiceImpl.USER_ID, userId));
 		return (T) user;
 	}
 
 	@Override
 	public T updloadProfile(String userId, MultipartFile file) {
 		User user = this.userRepository.findById(userId)
-				.orElseThrow(() -> new ResourceNotFoundException("User", "user_id", userId));
+				.orElseThrow(() -> new ResourceNotFoundException("User", UserServiceImpl.USER_ID, userId));
 
 		boolean isUpload = this.fileUploadHelper.uploadFile(file);
 		if (isUpload) {

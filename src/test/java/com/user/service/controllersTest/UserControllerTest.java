@@ -46,7 +46,7 @@ public class UserControllerTest {
 	private UserService userService;
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		user = new User("9ec9e3a5-6e27-4bf3-ae11-63083babcff7", "test1", "test1@dev.in", "test1");
 		users = Stream
@@ -57,7 +57,7 @@ public class UserControllerTest {
 
 	@Test
 	@DisplayName("test_create_user")
-	public void createUserTest() throws Exception {
+	void createUserTest() throws Exception {
 
 		String jsonRequest = mapper.writeValueAsString(user);
 
@@ -73,7 +73,7 @@ public class UserControllerTest {
 
 	@Test
 	@DisplayName("test_update_user")
-	public void updateUserTest() throws Exception {
+	void updateUserTest() throws Exception {
 
 		User updatedUser = new User("9ec9e3a5-6e27-4bf3-ae11-63083babcff7", "test2", "test2@dev.in", "test2");
 
@@ -94,7 +94,7 @@ public class UserControllerTest {
 
 	@Test
 	@DisplayName("test_delete_user")
-	public void deleteUserTest() throws Exception {
+	void deleteUserTest() throws Exception {
 		
 		when(this.userService.deleteUser(user.getUserId())).thenReturn(new ApiResponse("User Deleted Successfully !!!", true, HttpStatus.OK));
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders.delete("/api/v1/users/remove/9ec9e3a5-6e27-4bf3-ae11-63083babcff7");
@@ -107,7 +107,7 @@ public class UserControllerTest {
 
 	@Test
 	@DisplayName("test_get_all_users")
-	public void getAllUsersTest() throws Exception {
+	void getAllUsersTest() throws Exception {
 		
 		when(this.userService.getAllUsers()).thenReturn(List.of(users.get(0), users.get(1)));
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/api/v1/users/get-all").accept(MediaType.APPLICATION_JSON);
@@ -124,7 +124,7 @@ public class UserControllerTest {
 	
 	@Test
 	@DisplayName("test_get_user_by_id")
-	public void getUserById() throws Exception {
+	void getUserById() throws Exception {
 		
 		when(this.userService.getUserById(user.getUserId())).thenReturn(users.get(0));
 		MockHttpServletRequestBuilder request = MockMvcRequestBuilders.get("/api/v1/users/get/9ec9e3a5-6e27-4bf3-ae11-63083babcff7").accept(MediaType.APPLICATION_JSON);

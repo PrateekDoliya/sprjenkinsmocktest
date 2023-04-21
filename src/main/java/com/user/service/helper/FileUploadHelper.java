@@ -1,7 +1,6 @@
 package com.user.service.helper;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -19,10 +18,12 @@ import com.user.service.exceptions.FileUploadException;
 public class FileUploadHelper {
 
 	public FileUploadHelper() throws IOException {
+		super();
 	}
 
 	// public final String UPLOAD_DIR =
 	// "D:\\Mokito\\UserService\\src\\main\\resources\\static\\image";
+	
 	public final String UPLOAD_DIR = new ClassPathResource("static/image/").getFile().getAbsolutePath();
 
 	public boolean uploadFile(MultipartFile file) {
@@ -31,8 +32,10 @@ public class FileUploadHelper {
 		try {
 
 			InputStream inputStream = file.getInputStream();
-			byte data[] = new byte[inputStream.available()];
-			inputStream.read(data);
+			if(inputStream != null ) {
+				byte []data = new byte[inputStream.available()];
+				inputStream.read(data);
+			}
 
 			// write
 
