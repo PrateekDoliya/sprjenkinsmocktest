@@ -30,7 +30,7 @@ pipeline{
         }
         stage("Push to DockerHub & Run Container"){
             parallel {
-                stage("Pussh to DockerHub") {
+                stage("Push to DockerHub") {
                     steps{
                         echo "======== pushing docker image to docker hub ========"
                         bat "docker image tag sprjenkinsmocktest prateek/sprjenkinsmocktest"
@@ -40,7 +40,7 @@ pipeline{
                 stage("run DockerContainer") {
                     steps {
                         echo "======== running docker image as SpringJenkinsMockContainer ========"
-                        bat "docker run --name SpringJenkinsMockContainer -it -d sprjenkinsmocktest"
+                        bat "docker-compose up"
                     }
                 }
             }

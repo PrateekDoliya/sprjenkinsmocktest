@@ -1,6 +1,5 @@
 package com.user.service.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -71,13 +70,21 @@ public class UserController<T> {
 			return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(new ApiResponse("File Cant not be empty !!", false, HttpStatus.BAD_REQUEST));
 		}
-
-		String fileContentType = file.getContentType();
 		
-		if ((!file.isEmpty())
-				&& (!fileContentType.equals("image/jpg") && !file.getContentType().equals("image/jpeg"))) {
+		try {
+			
+			String fileContentType =null;
+			if(!file.isEmpty()) 
+				fileContentType = file.getContentType();
+			
+			if (!fileContentType.equals("image/jpg") && !file.getContentType().equals("image/jpeg")) {
+				return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new ApiResponse("Only JPG or JPEG File Allowed !!", false, HttpStatus.BAD_REQUEST));
+			}
+			
+		} catch (NullPointerException e) {
 			return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(new ApiResponse("Only JPG or JPEG File Allowed !!", false, HttpStatus.BAD_REQUEST));
+					.body(new ApiResponse("File Cant not be empty !!", false, HttpStatus.BAD_REQUEST));
 		}
 
 		// upload file to folder and add file name to user
