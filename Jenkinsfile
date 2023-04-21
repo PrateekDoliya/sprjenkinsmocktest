@@ -40,7 +40,7 @@ pipeline{
                 stage("run DockerContainer") {
                     steps {
                         echo "======== running docker image as SpringJenkinsMockContainer ========"
-                        bat "docker run --name SpringJenkinsMockContainer --it -d sprjenkinsmocktest"
+                        bat "docker run --name SpringJenkinsMockContainer -it -d sprjenkinsmocktest"
                     }
                 }
             }
