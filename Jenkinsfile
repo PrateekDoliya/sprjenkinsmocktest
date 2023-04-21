@@ -7,7 +7,7 @@ pipeline{
         stage("Sonar"){
             steps{
                 echo "======== sonar ========"
-                bat "mvn --version"
+                bat "mvn sonar:sonar"
             }
         }
         stage("Test"){
@@ -24,26 +24,24 @@ pipeline{
         }
         stage("Docker Image"){
             steps{
-                echo "======== building docker imnage ========"
-                bat "docker build -t jankinsspr ."
+                echo "======== building docker image ========"
+                bat "docker build -t sprjenkinsmocktest ."
             }
         }
-        stage("Push To DockerHub & Run Container"){
-           parallel{
-                stage("Push to DockerHub") {
+        stage("Push to DockerHub & Run Container"){
+            parallel {
+                stage("Pussh to DockerHub") {
                     steps{
                         echo "======== pushing docker image to docker hub ========"
-                        bat "docker image tag jankinsspr prateek/jankinsspr"
-                        bat "docker image  push prateek/jankinsspr"
+                        bat "docker image tag sprjenkinsmocktest prateek/sprjenkinsmocktest"
+                        bat "docker image  push prateek/sprjenkinsmocktest"
                     }
                 }
-                stage("Run DockerContainer") {
-                    steps{
-                        echo "======== running docker image as SpringJenkinsMockContainer ========"
-                        bat "docker run --name SpringJenkinsMockContainer -it -d jankinsspr"
-                    }
+                stage("run DockerContainer") {
+                    echo "======== running docker image as SpringJenkinsMockContainer ========"
+                        bat "docker run ---name SpringJenkinsMockContainer --it -d sprjenkinsmocktest"
                 }
-           }
+            }
         }
     }
     post{
