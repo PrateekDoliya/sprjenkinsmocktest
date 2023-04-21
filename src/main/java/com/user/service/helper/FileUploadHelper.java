@@ -13,6 +13,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.user.service.exceptions.FileUploadException;
+
 @Component
 public class FileUploadHelper {
 
@@ -48,7 +50,8 @@ public class FileUploadHelper {
 			isUpload = true;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new FileUploadException(e.getMessage());
+//			e.printStackTrace();
 		}
 
 		return isUpload;

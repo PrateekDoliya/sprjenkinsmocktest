@@ -71,9 +71,11 @@ public class UserController<T> {
 					.body(new ApiResponse("File Cant not be empty !!", false, HttpStatus.BAD_REQUEST));
 		}
 
-		if (!file.getContentType().equals("image/jpg") && !file.getContentType().equals("image/jpeg")) {
-			return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body(new ApiResponse("Only JPG or JPEG File Allowed !!", false, HttpStatus.BAD_REQUEST));
+		if(!file.isEmpty()) {
+			if (!file.getContentType().equals("image/jpg") && !file.getContentType().equals("image/jpeg")) {
+				return (ResponseEntity<T>) ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new ApiResponse("Only JPG or JPEG File Allowed !!", false, HttpStatus.BAD_REQUEST));
+			}
 		}
 
 		// upload file to folder and add file name to user
