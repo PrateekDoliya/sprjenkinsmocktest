@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.apache.velocity.runtime.resource.loader.ResourceLoader;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,7 +26,7 @@ public class FileUploadHelper {
 	// public final String UPLOAD_DIR =
 	// "D:\\Mokito\\UserService\\src\\main\\resources\\static\\image";
 	
-	public final String UPLOAD_DIR = new ClassPathResource("static/image/").getFile().getPath();
+	/*public final String UPLOAD_DIR = new ClassPathResource("static/image/").getFile().getPath();
 
 	public boolean uploadFile(MultipartFile file) {
 		boolean isUpload = false;
@@ -57,6 +59,6 @@ public class FileUploadHelper {
 //			e.printStackTrace();
 		}
 
-		return isUpload;
-	}
+		return isUpload;*/
+//	}
 }
