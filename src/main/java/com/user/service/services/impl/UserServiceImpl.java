@@ -78,12 +78,12 @@ public class UserServiceImpl<T> implements UserService<T> {
 		User user = this.userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User", UserServiceImpl.USER_ID, userId));
 
-		boolean isUpload = this.fileUploadHelper.uploadFile(file);
-		if (isUpload) {
-			user.setUserProfile(file.getOriginalFilename());
-			this.userRepository.save(user);
-			return (T) new ApiResponse("File Uploaded Successfully!!!", true, HttpStatus.OK);
-		}
+//		boolean isUpload = this.fileUploadHelper.uploadFile(file);
+//		if (isUpload) {
+//			user.setUserProfile(file.getOriginalFilename());
+//			this.userRepository.save(user);
+//			return (T) new ApiResponse("File Uploaded Successfully!!!", true, HttpStatus.OK);
+//		}
 
 		return (T) new ApiResponse("Something Went Wrong !!", false, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
