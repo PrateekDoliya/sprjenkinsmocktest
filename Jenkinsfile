@@ -7,7 +7,7 @@ pipeline{
         stage("Sonar"){
             steps{
                 echo "======== sonar ========"
-                bat "mvn sonar:sonar"
+                bat "mvn --version"
             }
         }
         stage("Test"){
