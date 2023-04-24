@@ -24,7 +24,7 @@ public class FileUploadHelper {
 	// public final String UPLOAD_DIR =
 	// "D:\\Mokito\\UserService\\src\\main\\resources\\static\\image";
 	
-	public final String UPLOAD_DIR = new ClassPathResource("static/image/").getFile().getAbsolutePath();
+	public final String UPLOAD_DIR = new ClassPathResource("static/image/").getFile().getPath();
 
 	public boolean uploadFile(MultipartFile file) {
 		boolean isUpload = false;
