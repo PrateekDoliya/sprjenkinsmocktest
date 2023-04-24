@@ -1,17 +1,9 @@
 package com.user.service.services.impl;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,8 +22,8 @@ public class UserServiceImpl<T> implements UserService<T> {
 	@Autowired
 	private UserRepository userRepository;
 
-//	@Autowired
-//	private FileUploadHelper fileUploadHelper;
+	@Autowired
+	private FileUploadHelper fileUploadHelper;
 	
 	private static final  String USER_ID = "user_id";
 
@@ -78,12 +70,12 @@ public class UserServiceImpl<T> implements UserService<T> {
 		User user = this.userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User", UserServiceImpl.USER_ID, userId));
 
-//		boolean isUpload = this.fileUploadHelper.uploadFile(file);
-//		if (isUpload) {
-//			user.setUserProfile(file.getOriginalFilename());
-//			this.userRepository.save(user);
-//			return (T) new ApiResponse("File Uploaded Successfully!!!", true, HttpStatus.OK);
-//		}
+		boolean isUpload = this.fileUploadHelper.uploadFile(file);
+		if (isUpload) {
+			user.setUserProfile(file.getOriginalFilename());
+			this.userRepository.save(user);
+			return (T) new ApiResponse("File Uploaded Successfully!!!", true, HttpStatus.OK);
+		}
 
 		return (T) new ApiResponse("Something Went Wrong !!", false, HttpStatus.INTERNAL_SERVER_ERROR);
 	}

@@ -8,31 +8,25 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
-import org.apache.velocity.runtime.resource.loader.ResourceLoader;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.user.service.exceptions.FileUploadException;
+
 
 @Component
 public class FileUploadHelper {
 
 	public FileUploadHelper() throws IOException {
-		
-	}
-
-	// public final String UPLOAD_DIR =
-	// "D:\\Mokito\\UserService\\src\\main\\resources\\static\\image";
 	
-	/*public final String UPLOAD_DIR = new ClassPathResource("static/image/").getFile().getPath();
+	}
+//	public final String UPLOAD_DIR = "D:\\Mokito\\UserService\\src\\main\\resources\\static\\image";
+	public final String UPLOAD_DIR = new ClassPathResource("/static/image").getPath();
 
 	public boolean uploadFile(MultipartFile file) {
 		boolean isUpload = false;
-
+		System.out.println("DIR:"+UPLOAD_DIR);
 		try {
-
 			InputStream inputStream = file.getInputStream();
 			if(inputStream != null ) {
 				byte []data = new byte[inputStream.available()];
@@ -59,6 +53,6 @@ public class FileUploadHelper {
 //			e.printStackTrace();
 		}
 
-		return isUpload;*/
-//	}
+		return isUpload;
+	}
 }
