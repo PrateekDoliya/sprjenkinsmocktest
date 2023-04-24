@@ -13,7 +13,7 @@ services:
       - bootcomposeapp
 
   springjenkinsmockservice:
-    build: .
+    build: ./
     depends_on: 
       - dbservice
     environment:

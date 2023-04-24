@@ -18,7 +18,7 @@ import com.user.service.exceptions.FileUploadException;
 public class FileUploadHelper {
 
 	public FileUploadHelper() throws IOException {
-		super();
+		
 	}
 
 	// public final String UPLOAD_DIR =
