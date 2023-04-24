@@ -30,8 +30,8 @@ public class UserServiceImpl<T> implements UserService<T> {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private FileUploadHelper fileUploadHelper;
+//	@Autowired
+//	private FileUploadHelper fileUploadHelper;
 	
 	private static final  String USER_ID = "user_id";
 
